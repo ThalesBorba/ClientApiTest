@@ -1,5 +1,6 @@
 package com.foursys.clients.controller;
 
+import com.foursys.clients.dto.ClientBody;
 import com.foursys.clients.entities.Client;
 import com.foursys.clients.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,8 @@ public class ClientController {
     private ClientService clientService;
 
     @PostMapping("/")
-    public ResponseEntity<String> createClient(@RequestBody @Valid Client client) {
+    public ResponseEntity<String> createClient(@RequestBody @Valid ClientBody clientBody) {
+        clientService.createClient(clientBody);
         return ResponseEntity.status(HttpStatus.CREATED).body("Salvo com sucesso");
     }
 
@@ -29,32 +31,32 @@ public class ClientController {
         return ResponseEntity.status(HttpStatus.OK).body(clientService.listAll());
     }
 
-    @GetMapping("/{name}")
-    public ResponseEntity<Client> findByName(@PathVariable @Valid String name) {
+    @GetMapping("/by-name/{name}")
+    public ResponseEntity<Client> findByName(@PathVariable String name) {
         return ResponseEntity.status(HttpStatus.OK).body(clientService.findByName(name));
     }
 
-    @PutMapping("/{name}")
-    public ResponseEntity<String> updatePaymentInfoByCpf(@PathVariable @Valid String name, @RequestBody @Valid Client client) {
-        clientService.updateByName(name, client);
+    @PutMapping("/by-name/{name}")
+    public ResponseEntity<String> updateByName(@PathVariable @Valid String name, @RequestBody @Valid ClientBody clientBody) {
+        clientService.updateByName(name, clientBody);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body("Atulizado com sucesso");
     }
 
     @Transactional
-    @DeleteMapping("/{name}")
+    @DeleteMapping("/by-name/{name}")
     public ResponseEntity<String> deleteByCpf(@PathVariable String name) {
         clientService.deleteByName(name);
             return ResponseEntity.status(HttpStatus.ACCEPTED).body("Removido com sucesso!");
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Client> findById(@PathVariable @Valid Long id) {
+    public ResponseEntity<Client> findById(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(clientService.findById(id));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateById(@PathVariable @Valid Long id, @RequestBody @Valid Client client) {
-        clientService.updateById(id, client);
+    public ResponseEntity<String> updateById(@PathVariable @Valid Long id, @RequestBody @Valid ClientBody clientBody) {
+        clientService.updateById(id, clientBody);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body("Atualizado com sucesso!");
     }
 

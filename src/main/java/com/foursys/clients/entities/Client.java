@@ -3,6 +3,7 @@ package com.foursys.clients.entities;
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.hibernate.validator.constraints.br.CPF;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -28,6 +29,7 @@ public class Client implements Serializable {
     private String cpf;
     @NotNull
     private String name;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataNascimento;
 
     @Override

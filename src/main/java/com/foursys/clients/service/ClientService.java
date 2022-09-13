@@ -1,6 +1,7 @@
 package com.foursys.clients.service;
 
 
+import com.foursys.clients.dto.ClientBody;
 import com.foursys.clients.entities.Client;
 import com.foursys.clients.exceptions.ClientNotFoundException;
 import com.foursys.clients.repositories.ClientRepository;
@@ -16,22 +17,23 @@ public class ClientService {
     @Autowired
     private ClientRepository clientRepository;
 
-    public void createClient(Client client) {
+    public void createClient(ClientBody clientBody) {
+        Client client = new Client();
+        BeanUtils.copyProperties(clientBody, client);
         clientRepository.save(client);
     }
 
-    public void updateByName(String name, Client client) {
+    public void updateByName(String name, ClientBody clientBody) {
         Client clientToBeUpdate = clientRepository.findByName(name).orElseThrow(() -> new ClientNotFoundException(name));
-        BeanUtils.copyProperties(client, clientToBeUpdate);
+        BeanUtils.copyProperties(clientBody, clientToBeUpdate);
         clientRepository.save(clientToBeUpdate);
 
     }
 
-    public void updateById(Long id, Client client) {
+    public void updateById(Long id, ClientBody clientBody) {
         Client clientToBeUpdate = clientRepository.findById(id).orElseThrow(() -> new ClientNotFoundException(id));
-        BeanUtils.copyProperties(client, clientToBeUpdate);
+        BeanUtils.copyProperties(clientBody, clientToBeUpdate);
         clientRepository.save(clientToBeUpdate);
-
     }
 
     public List<Client> listAll() {
