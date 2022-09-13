@@ -57,7 +57,7 @@ public class ClientController {
     @PutMapping("/{id}")
     public ResponseEntity<String> updateById(@PathVariable @Valid Long id, @RequestBody @Valid ClientBody clientBody) {
         clientService.updateById(id, clientBody);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body("Update!");
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body("Updated!");
     }
 
     @Transactional
