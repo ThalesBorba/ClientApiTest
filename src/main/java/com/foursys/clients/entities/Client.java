@@ -22,7 +22,7 @@ public class Client implements Serializable {
     private String cpf;
     @NotNull
     private String name;
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate birthDate;
 
 }
