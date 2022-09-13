@@ -8,12 +8,7 @@ import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
-@Getter
-@Setter
-@ToString
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 public class ClientBody {
 
     @CPF
@@ -22,5 +17,5 @@ public class ClientBody {
     @NotNull
     private String name;
     @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private LocalDate dataNascimento;
+    private LocalDate birthDate;
 }

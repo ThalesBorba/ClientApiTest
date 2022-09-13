@@ -23,7 +23,7 @@ public class ClientController {
     @PostMapping("/")
     public ResponseEntity<String> createClient(@RequestBody @Valid ClientBody clientBody) {
         clientService.createClient(clientBody);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Salvo com sucesso");
+        return ResponseEntity.status(HttpStatus.CREATED).body("Created!");
     }
 
     @GetMapping("/")
@@ -39,14 +39,14 @@ public class ClientController {
     @PutMapping("/by-name/{name}")
     public ResponseEntity<String> updateByName(@PathVariable @Valid String name, @RequestBody @Valid ClientBody clientBody) {
         clientService.updateByName(name, clientBody);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body("Atulizado com sucesso");
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body("Updated!");
     }
 
     @Transactional
     @DeleteMapping("/by-name/{name}")
     public ResponseEntity<String> deleteByCpf(@PathVariable String name) {
         clientService.deleteByName(name);
-            return ResponseEntity.status(HttpStatus.ACCEPTED).body("Removido com sucesso!");
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body("Removed!");
     }
 
     @GetMapping("/{id}")
@@ -57,14 +57,14 @@ public class ClientController {
     @PutMapping("/{id}")
     public ResponseEntity<String> updateById(@PathVariable @Valid Long id, @RequestBody @Valid ClientBody clientBody) {
         clientService.updateById(id, clientBody);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body("Atualizado com sucesso!");
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body("Update!");
     }
 
     @Transactional
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteByCpf(@PathVariable Long id) {
         clientService.deleteById(id);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body("Removido com sucesso!");
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body("Removed!");
     }
 
 

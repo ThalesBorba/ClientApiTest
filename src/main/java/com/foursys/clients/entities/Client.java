@@ -1,7 +1,6 @@
 package com.foursys.clients.entities;
 
 import lombok.*;
-import org.hibernate.Hibernate;
 import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -9,15 +8,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Objects;
 
 @Entity
-@Getter
-@Setter
-@ToString
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 @Table(name="clients")
 public class Client implements Serializable {
 
@@ -30,19 +23,7 @@ public class Client implements Serializable {
     @NotNull
     private String name;
     @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private LocalDate dataNascimento;
+    private LocalDate birthDate;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Client client = (Client) o;
-        return id != null && Objects.equals(id, client.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
 }
 
